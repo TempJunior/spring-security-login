@@ -1,0 +1,180 @@
+/*
+    ======================================
+    CONFIGURAÇÃO GERAL E VARIÁVEIS
+    ======================================
+*/
+:root {
+    --primary-color: #007bff; /* Azul Forte */
+    --secondary-color: #6c757d; /* Cinza para textos secundários */
+    --dark-bg: #1f2937; /* Fundo escuro sutil (Navy/Dark Gray) */
+    --light-text: #f8f9fa; /* Texto claro */
+    --card-bg: #ffffff;
+    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.2);
+    --border-radius: 6px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/*
+    ======================================
+    NAVBAR
+    ======================================
+*/
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background-color: rgba(33, 37, 41, 0.95); /* Fundo da barra um pouco mais escuro e opaco */
+    box-shadow: var(--shadow-light);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.logo .icon {
+    font-size: 1.2em;
+    margin-right: 5px;
+}
+
+.navbar nav a, .navbar nav button {
+    color: var(--light-text);
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 8px 15px;
+    border-radius: var(--border-radius);
+    transition: background-color 0.3s, color 0.3s;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    background: none;
+    font-size: 1em;
+}
+
+.navbar nav a:hover, .navbar nav button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-button {
+    background-color: var(--primary-color);
+    color: white !important;
+    padding: 10px 20px;
+}
+
+.nav-button:hover {
+    background-color: #0056b3;
+}
+
+.logout-btn {
+    background-color: #dc3545; /* Vermelho para destaque de logout */
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+}
+
+/*
+    ======================================
+    SEÇÃO HERO (Conteúdo Principal)
+    ======================================
+*/
+.hero-section {
+    flex-grow: 1; /* Ocupa o espaço restante */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px 20px;
+    /* Fundo com gradiente sutil para identidade visual de tecnologia/segurança */
+    background: linear-gradient(135deg, rgba(31, 41, 55, 0.9), rgba(13, 22, 33, 0.9)), url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.4); /* Fundo semi-transparente para leitura */
+    border-radius: var(--border-radius);
+}
+
+.hero-content h1 {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.hero-content p {
+    font-size: 1.3em;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 35px;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 50px; /* Botão arredondado para destaque */
+    transition: background-color 0.3s, transform 0.1s;
+    letter-spacing: 0.5px;
+}
+
+.cta-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.cta-subtext {
+    margin-top: 20px !important;
+    font-size: 1em !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.cta-subtext a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+/*
+    ======================================
+    RODAPÉ
+    ======================================
+*/
+.footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #111827;
+    color: var(--secondary-color);
+    font-size: 0.9em;
+}
+
+.footer span[sec:authorize="isAuthenticated()"] {
+    color: var(--success-color); /* Verde para Online */
+}
+.footer span[sec:authorize="!isAuthenticated()"] {
+    color: var(--error-color); /* Vermelho para Offline */
+}
