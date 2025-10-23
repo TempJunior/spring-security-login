@@ -11,13 +11,19 @@ import java.util.stream.Collectors;
 
 @Getter
 public class CustomAuthentication implements Authentication {
+    /**
+     * @author juniorTemp <br>
+     * Classe que é responsavel por criar uma Autenticação customizavel
+     * e devolver um autenticação quando ouver um login. <br>
+     * Possui os metodos gerais para pegar as credenciais do usuario que está
+     * autenticado na aplicação.
+     * */
 
     private final Usuario usuario;
 
     public CustomAuthentication(Usuario usuario){
         this.usuario = usuario;
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

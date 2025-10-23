@@ -13,6 +13,13 @@ import java.beans.Encoder;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
+
+    /**
+     @author juniorTemp <br>
+     * Classe que prove uma Authenticação customizada e
+     * encapsula a logica dentro do metodo @authenticate
+     */
+
     private final UsuarioService usuarioService;
     private final PasswordEncoder encoder;
 
@@ -32,7 +39,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         }
 
         String senhaCriptografada = usuarioEncontrado.getPassword();
-        boolean senhaBate = encoder.matches(senhaCriptografada, senhaCriptografada); //Sempre nessa sequencia de parametro
+        boolean senhaBate = encoder.matches(senhaDigitada, senhaCriptografada); //Sempre nessa sequencia de parametro
 
         if (senhaBate){
             return new CustomAuthentication(usuarioEncontrado);
