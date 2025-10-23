@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SecurityService {
-    /***
+    /**
      Essa classe serve para auditoria de usaurio
      Devolve um login do usuario logado a partir do contexto do Spring security
-     ***/
+     */
 
     private UsuarioService service;
 
@@ -22,8 +22,11 @@ public class SecurityService {
 
     public Usuario gettingLoggedUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String login = userDetails.getUsername();
-        return service.obterPorLogin(login);
+
+        if(authentication instanceof CustomAuthentication customAuthentication){
+            return customAuthentication.getUsuario();
+        }
+
+        return null;
     }
 }

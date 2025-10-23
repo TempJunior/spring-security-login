@@ -4,6 +4,7 @@ import io.tempjunior.github.spring_security.domain.model.Usuario;
 import io.tempjunior.github.spring_security.domain.service.UsuarioService;
 import io.tempjunior.github.spring_security.web.dto.request.UsuarioDTO;
 import io.tempjunior.github.spring_security.web.dto.response.UserResponseDTO;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponseDTO> create(@RequestBody UsuarioDTO userDTO){
+    public ResponseEntity<UserResponseDTO> create(@RequestBody @Valid UsuarioDTO userDTO){
         var user = new Usuario(userDTO);
         service.create(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(new UserResponseDTO(user));

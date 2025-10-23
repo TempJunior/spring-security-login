@@ -25,6 +25,7 @@ public class Usuario {
 
     private String login;
     private String password;
+    private String email;
 
     @Column(name = "roles")
     @ElementCollection(fetch = FetchType.EAGER)
