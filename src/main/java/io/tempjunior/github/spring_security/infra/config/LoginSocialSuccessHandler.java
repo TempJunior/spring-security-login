@@ -13,9 +13,11 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.List;
 
 @Component
 public class LoginSocialSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+    private static String SENHA_PADRAO = "mudar@123";
 
     private final UsuarioService usuarioService;
 
@@ -32,9 +34,28 @@ public class LoginSocialSuccessHandler extends SavedRequestAwareAuthenticationSu
         OAuth2User oAuth2User = authenticationToken.getPrincipal();
         String email = oAuth2User.getAttribute("email");
         Usuario usuario = usuarioService.obterPorEmail(email);
+
+        if (usuario == null){
+            cadastrarNaBaseComLoginSocial(email);
+        }
+
         CustomAuthentication customAuthentication = new CustomAuthentication(usuario);
 
         SecurityContextHolder.getContext().setAuthentication(customAuthentication);
         super.onAuthenticationSuccess(request, response, customAuthentication);
+    }
+
+    protected void cadastrarNaBaseComLoginSocial(String email){
+        Usuario usuario = new Usuario();
+        usuario.setEmail(email);
+        usuario.setLogin(criaLogin(email));
+        usuario.setPassword(SENHA_PADRAO);
+        usuario.setRoles(List.of("USER"));
+        usuarioService.create(usuario);
+        logger.info("USUARIO CADASTRADO NA BASE - LOGIN: " + usuario.getLogin());
+    }
+
+    protected String criaLogin(String email){
+        return email.substring(0, email.indexOf("@"));
     }
 }
